@@ -7,7 +7,7 @@
     <style>
         /* Base Styles */
         html {
-            scroll-behavior: smooth; /* Added for smooth navigation */
+            scroll-behavior: smooth;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -100,7 +100,7 @@
             font-weight: bold;
             transition: color 0.3s;
             text-transform: uppercase;
-            font-size: 1rem; /* Slightly larger for easier tapping */
+            font-size: 1rem;
             letter-spacing: 1px;
         }
         nav a:hover {
@@ -337,9 +337,13 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        .submit-btn:hover {
+        .submit-btn:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(42, 82, 152, 0.4);
+        }
+        .submit-btn:disabled {
+            background: #7f8c8d;
+            cursor: not-allowed;
         }
 
         /* Footer */
@@ -356,7 +360,7 @@
 
     <header>
         <div class="header-container">
-            <img src="Milan Logo.jpeg" alt="Milan Enterprises Logo">
+            <img src="Milan Logo.png" alt="Milan Enterprises Logo">
             <div class="header-text">
                 <h1>Milan Enterprises</h1>
                 <p>A New Dimension of Services</p>
@@ -382,7 +386,7 @@
         <section id="about">
             <h2>Proprietor's Desk</h2>
             <p>We warmly welcome you to Milan Enterprises, a highly professional and reliable company based in Bangalore, the IT capital and Silicon Valley of India. Located in Konanakunte, Kanakapura Road, we have been celebrating 16 years of successful service since 2010. Our principal objective is to facilitate the Indian quality workforce worldwide.</p>
-            <p><strong>- Made Gowda M</strong></p>
+            <p><strong>- Made Gowda M, Proprietor</strong></p>
         </section>
 
         <section id="services">
@@ -473,12 +477,12 @@
         <!-- Application Form Section -->
         <section id="apply" class="form-container">
             <h3>Apply Online / Quick Contact</h3>
-            <form action="process_form.php" method="POST" enctype="multipart/form-data">
+            <form id="milanForm">
                 
                 <div class="grid" style="gap: 15px;"> 
                     <div class="form-group">
                         <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" placeholder="Madappa" required>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone Number *</label>
@@ -488,7 +492,7 @@
                 
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="Madappa@gmail.com">
+                    <input type="email" id="email" name="email" placeholder="john.doe@example.com">
                 </div>
                 
                 <div class="form-group">
@@ -503,18 +507,48 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="resume">Upload Resume (PDF, DOCX)</label>
-                    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" style="padding: 10px; background: #f8f9fa;">
-                </div>
-                
-                <div class="form-group">
                     <label for="message">Cover Letter / Message</label>
                     <textarea id="message" name="message" placeholder="Briefly describe your experience or inquiry..."></textarea>
                 </div>
                 
-                <button type="submit" class="submit-btn">Submit Application</button>
+                <button type="submit" id="submitBtn" class="submit-btn">Submit Application</button>
+                <p id="successMessage" style="display:none; color: #27ae60; font-weight: bold; text-align: center; margin-top: 15px;">Application submitted successfully!</p>
             </form>
         </section>
+
+        <!-- Google Sheets Submission Script -->
+        <script>
+            const form = document.getElementById('milanForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Your Live Google Web App URL
+            const googleAppUrl = 'https://script.google.com/macros/s/AKfycbwlcA2uR4FHszy9GMlthR9qjOjAn1Sz_XPD9FjJF_0FRqUyG92DbxQxvYi48JVmdqda8A/exec'; 
+
+            form.addEventListener('submit', e => {
+                e.preventDefault(); 
+                
+                submitBtn.innerText = "Sending...";
+                submitBtn.disabled = true;
+                
+                let formData = new FormData(form);
+
+                fetch(googleAppUrl, { method: 'POST', body: formData })
+                    .then(response => {
+                        successMessage.style.display = "block";
+                        submitBtn.innerText = "Submit Application";
+                        submitBtn.disabled = false;
+                        form.reset(); 
+                        
+                        setTimeout(() => { successMessage.style.display = "none"; }, 5000);
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        submitBtn.innerText = "Error - Try Again";
+                        submitBtn.disabled = false;
+                    });
+            });
+        </script>
 
         <section id="contact">
             <h2>Contact Us</h2>
