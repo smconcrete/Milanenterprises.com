@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milan Enterprises - Facility Management</title>
+    <style>
+        /* Base Styles */
+        html {
+            scroll-behavior: smooth; /* Added for smooth navigation */
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fcfcfc;
+        }
+        
+        /* --- PROFESSIONAL HEADER --- */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #ffffff;
+            padding: 2.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1100px;
+            margin: auto;
+            flex-wrap: wrap;
+        }
+        header img {
+            max-width: 130px;
+            height: auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        header img:hover {
+            transform: scale(1.05);
+        }
+        .header-text {
+            text-align: left;
+        }
+        .header-text h1 {
+            margin: 0;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        .header-text p {
+            margin: 5px 0 0 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #e0e0e0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Responsive tweak for mobile headers */
+        @media (max-width: 600px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            .header-text {
+                text-align: center;
+            }
+            .header-text h1 {
+                font-size: 2.2rem;
+            }
+        }
+        /* --------------------------- */
+        
+        /* Nav */
+        nav {
+            background-color: #34495e;
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: #ecf0f1;
+            text-decoration: none;
+            margin: 5px 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            font-size: 1rem; /* Slightly larger for easier tapping */
+            letter-spacing: 1px;
+        }
+        nav a:hover {
+            color: #3498db;
+        }
+        
+        /* Layout */
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px;
+        }
+        
+        /* Typography & Components */
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem;
+            background-color: #ecf0f1;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 2rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            color: #27ae60;
+        }
+        .clients ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        
+        /* --- CSS FOR PURE HTML ADVERTISEMENT BANNER --- */
+        .careers-section {
+            margin-top: 3rem;
+        }
+        .walk-in-ad {
+            max-width: 850px;
+            margin: 0 auto 3rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            background: #fff;
+        }
+        .ad-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+        .ad-header .company-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #e0e0e0;
+        }
+        .ad-header h3 {
+            font-size: 3.5rem;
+            margin: 10px 0;
+            font-weight: 900;
+            letter-spacing: 1px;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+        .ad-header .subtitle {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .ad-body {
+            background: #f8f9fa;
+            padding: 2rem;
+        }
+        .positions-box {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-left: 6px solid #2a5298;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        }
+        .positions-box h4 {
+            margin-top: 0;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .positions-box ol {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+        .detail-item {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .detail-item strong {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .detail-item span {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        .venue-box {
+            background: #e9ecef;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            color: #333;
+            border: 1px solid #dee2e6;
+        }
+        .venue-box strong {
+            color: #7f8c8d;
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .venue-box p {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2c3e50;
+            line-height: 1.5;
+        }
+
+        /* --- APPLICATION FORM --- */
+        .form-container {
+            max-width: 850px;
+            margin: 0 auto 3rem auto;
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-top: 6px solid #2a5298;
+        }
+        .form-container h3 {
+            text-align: center;
+            color: #1e3c72;
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ccd1d9;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+        .form-group textarea {
+            resize: vertical;
+            height: 120px;
+        }
+        .submit-btn {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(42, 82, 152, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <img src="Milan Logo.png" alt="Milan Enterprises Logo">
+            <div class="header-text">
+                <h1>Milan Enterprises</h1>
+                <p>A New Dimension of Services</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#about">About Us</a>
+        <a href="#services">Our Services</a>
+        <a href="#clients">Clients</a>
+        <a href="#careers">Careers / Walk-Ins</a>
+        <a href="#apply">Apply Online</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <h2>Service At Your Door Step Beyond Expectations</h2>
+            <p>The right focus on right activities is the key to success! Activate your focus mode by availing our Facility Management, Housekeeping, Manpower, and Transportation Services.</p>
+        </section>
+
+        <section id="about">
+            <h2>Proprietor's Desk</h2>
+            <p>We warmly welcome you to Milan Enterprises, a highly professional and reliable company based in Bangalore, the IT capital and Silicon Valley of India. Located in Konanakunte, Kanakapura Road, we have been celebrating 16 years of successful service since 2010. Our principal objective is to facilitate the Indian quality workforce worldwide.</p>
+            <p><strong>- Made Gowda M</strong></p>
+        </section>
+
+        <section id="services">
+            <h2>Our Integrated Service Areas</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Housekeeping Services</h3>
+                    <p>Mechanized and Non-Mechanized service depending on the client's requirements. Specializing in Shop Floor Cleaning, Deep Cleaning, and Road Sweeping.</p>
+                </div>
+                <div class="card">
+                    <h3>Manpower Supply</h3>
+                    <p>Providing blue-collared workers (unskilled, semi-skilled, skilled), ITI/Diploma engineering staff, shop floor helpers, and specialized machine operators.</p>
+                </div>
+                <div class="card">
+                    <h3>Security Services</h3>
+                    <p>Highly qualified and well-trained security guards. Services include manned guarding, VIP protection, event security, and electronic surveillance.</p>
+                </div>
+                <div class="card">
+                    <h3>Landscaping & Gardening</h3>
+                    <p>Full range of maintenance including lawn plantation, horticulture, indoor/outdoor plant maintenance, and periodic pesticide treatment.</p>
+                </div>
+                <div class="card">
+                    <h3>Transportation</h3>
+                    <p>Wide range of vehicles in luxury and regular segments. Offering car rentals, mass employee transportation, and school/college transportation.</p>
+                </div>
+                <div class="card">
+                    <h3>Guesthouse Management</h3>
+                    <p>Assured service for a comfortable stay. Administration, guest relationship management, food/beverage service, and laundry.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="clients" class="clients">
+            <h2>Our Satisfied Clients</h2>
+            <ul>
+                <li>R-Logic Technology Services India Pvt Ltd. (Head Office, Harohalli, and Samsung Unit)</li>
+                <li>General Post Office (National Sorting Hub), Bangalore</li>
+                <li>Employees State Insurance Corporation, Regional Office</li>
+                <li>Shree Madeshwara Concretes, Kengeri</li>
+                <li>NTTF Ltd., Electronic City</li>
+                <li>Airforce, Vidyaranyapura, Bangalore</li>
+            </ul>
+        </section>
+
+        <section id="careers" class="careers-section">
+            <div class="walk-in-ad">
+                <div class="ad-header">
+                    <span class="company-name">RLOGIC PVT LTD</span>
+                    <h3>WALK-IN INTERVIEW</h3>
+                    <p class="subtitle">For Electronics Manufacturing Company</p>
+                </div>
+                
+                <div class="ad-body">
+                    <div class="positions-box">
+                        <h4>Open Positions</h4>
+                        <ol>
+                            <li>Production Operator</li>
+                            <li>Repair Technician</li>
+                            <li>Soldering Technician</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <strong>Experience</strong>
+                            <span>0 to 2 Years</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Date</strong>
+                            <span>Monday, June 01, 2026</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Time</strong>
+                            <span>9:00 AM to 11:00 AM</span>
+                        </div>
+                    </div>
+                    
+                    <div class="venue-box">
+                        <strong>Venue</strong>
+                        <p>RLOGIC PVT LTD<br>
+                        Behind Metro Mall, Next to Sarakki Signal,<br>
+                        JP Nagara, Bangalore</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application Form Section -->
+        <section id="apply" class="form-container">
+            <h3>Apply Online / Quick Contact</h3>
+            <form action="process_form.php" method="POST" enctype="multipart/form-data">
+                
+                <div class="grid" style="gap: 15px;"> 
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Madappa" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Madappa@gmail.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="position">Position Applying For</label>
+                    <select id="position" name="position">
+                        <option value="">-- Select a Position --</option>
+                        <option value="production">Production Operator</option>
+                        <option value="repair">Repair Technician</option>
+                        <option value="soldering">Soldering Technician</option>
+                        <option value="other">General Service Inquiry / Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="resume">Upload Resume (PDF, DOCX)</label>
+                    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" style="padding: 10px; background: #f8f9fa;">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Cover Letter / Message</label>
+                    <textarea id="message" name="message" placeholder="Briefly describe your experience or inquiry..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Submit Application</button>
+            </form>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p><strong>Head Office:</strong> MILAN ENTERPRISES, No 2, Belladahatti, 7th Cross, Konanakunte, Bangalore - 560 062</p>
+            <p><strong>Contact Numbers:</strong> 9964231483, 9844311115</p>
+            <p><strong>Email:</strong> milanenterprises@hotmail.com, milanenterprises.blr@gmail.com</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Milan Enterprises. Satisfactory Service is what Milan Enterprises gives.</p>
+    </footer>
+
+</body>
+</html>
